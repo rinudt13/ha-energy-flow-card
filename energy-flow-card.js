@@ -3,7 +3,7 @@
  * CSS animated dash flows • day/night photo switching • Tesla-style callouts
  */
 
-const CARD_VERSION = '4.9.1';
+const CARD_VERSION = '4.9.2';
 
 const DEFAULTS = {
   solar_power:       'sensor.rinu_s_home_solar_power',
@@ -24,8 +24,8 @@ const DEFAULTS = {
   fill_height:       false,
   weather:           'weather.forecast_home',
   sun:               'sun.sun',
-  bg_url:            'http://192.168.0.14:8766/house.png',
-  bg_url_night:      'http://192.168.0.14:8766/house-night.jpg',
+  bg_url:            'https://cdn.jsdelivr.net/gh/rinudt13/ha-energy-flow-card@main/house.png',
+  bg_url_night:      'https://cdn.jsdelivr.net/gh/rinudt13/ha-energy-flow-card@main/house-night.jpg',
   title:             "RINU'S HOME",
 };
 
