@@ -1,0 +1,48 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  energy-flow-card  — example Lovelace card configuration
+#
+#  IMPORTANT: Replace every sensor.xxx below with your actual entity IDs.
+#
+#  Power values are expected in WATTS (W).
+#  If your sensors report kilowatts (kW), multiply by 1000 with a template sensor.
+#
+#  Sign conventions assumed by this card:
+#   battery_power:   positive = charging,   negative = discharging
+#   grid_power:      positive = importing,   negative = exporting
+# ─────────────────────────────────────────────────────────────────────────────
+
+type: custom:energy-flow-card
+
+# ── Kiosk / tablet full-screen mode ───────────────────────────────────────────
+# Set fill_height: true when this card is the ONLY card on the view (panel mode)
+# and you want it to fill the entire screen (no black bars on 4:3 / 3:2 tablets).
+# Leave false (default) for normal dashboard use.
+fill_height: false
+
+entities:
+  # ── Tesla Powerwall (pypowerwall / Tesla integration) ──────────────────────
+  solar_power:      sensor.powerwall_solar_now        # W  — solar generation
+  battery_power:    sensor.powerwall_battery_now      # W  — battery flow (+charge/-discharge)
+  battery_soc:      sensor.powerwall_charge           # %  — state of charge 0-100
+  grid_power:       sensor.powerwall_grid_now         # W  — grid flow (+import/-export)
+  house_power:      sensor.powerwall_load_now         # W  — total home consumption
+
+  # ── Heat pump ──────────────────────────────────────────────────────────────
+  heat_pump_power:  sensor.heat_pump_power            # W  — replace with your entity
+
+  # ── EV charger ─────────────────────────────────────────────────────────────
+  ev_charger_power: sensor.ev_charger_power           # W  — replace with your entity
+
+  # ── Weather / Sun ──────────────────────────────────────────────────────────
+  weather:          weather.home                      # your weather entity
+  sun:              sun.sun                           # leave as-is unless renamed
+
+
+# ─── Alternative: if sensors are in kW, create template sensors ───────────────
+# In configuration.yaml (or a separate sensors.yaml):
+#
+# template:
+#   - sensor:
+#       - name: "Powerwall Solar Watts"
+#         unit_of_measurement: "W"
+#         state: "{{ (states('sensor.powerwall_solar_now') | float(0)) * 1000 }}"
